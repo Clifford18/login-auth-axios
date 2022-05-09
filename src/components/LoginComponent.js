@@ -1,8 +1,10 @@
 import React from 'react';
-import {useRef, useState, useEffect} from 'react';
+import {useRef, useState, useEffect, useContext} from 'react';
 import './LoginStyle.css';
+import {AuthContext} from "../context/AuthProvider";
 
 const LoginComponent = () => {
+	const {setAuth} = useContext(AuthContext);
 	const userRef = useRef();
 	const errRef = useRef();
 
