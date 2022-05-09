@@ -1,8 +1,8 @@
 import React from 'react';
 import {useRef, useState, useEffect} from 'react';
-import './Login.css';
+import './LoginStyle.css';
 
-const Login = () => {
+const LoginComponent = () => {
 	const userRef = useRef();
 	const errRef = useRef();
 
@@ -80,4 +80,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default LoginComponent;
