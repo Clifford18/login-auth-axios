@@ -8,7 +8,7 @@ import axios from '../api/axios';
 const LOGIN_URL = '/auth';
 
 const LoginComponent = () => {
-	const { setAuth } = useContext(AuthContext);
+	const {setAuth} = useContext(AuthContext);
 	const userRef = useRef();
 	const errRef = useRef();
 
@@ -19,11 +19,11 @@ const LoginComponent = () => {
 
 	useEffect(() => {
 		userRef.current.focus();
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [user, pwd])
+	}, [user, pwd]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -37,31 +37,26 @@ const LoginComponent = () => {
 			);
 			console.log(JSON.stringify(response?.data));
 			// console.log(JSON.stringify(response));
-			const accessToken =response?.data?.accessToken;
-			const roles =response?.data?.roles;
-			setAuth(user,pwd,roles,accessToken)
+			const accessToken = response?.data?.accessToken;
+			const roles = response?.data?.roles;
+			setAuth(user, pwd, roles, accessToken);
 			setUser('');
 			setPwd('');
 			setSuccess(true);
 
 		} catch (err) {
-			if(!err?.response){
+			if (!err?.response) {
 				setErrMsg('No server Response');
-			}else if (err.response?.status ===400){
+			} else if (err.response?.status === 400) {
 				setErrMsg('Missing Username or Password');
-			}else if (err.response?.status ===401){
+			} else if (err.response?.status === 401) {
 				setErrMsg('Unauthorized');
-			}else {
+			} else {
 				setErrMsg('Login Failed');
 			}
 			errRef.current.focus();
-
 		}
-		console.log(user, pwd);
-		setUser('');
-		setPwd('');
-		setSuccess(true);
-	};
+	}
 
 	return (
 		<>
@@ -72,11 +67,10 @@ const LoginComponent = () => {
 					<p>
 						<a href="#">GO to the Dashboard</a>
 					</p>
-
 				</section>
 			) : (
 				<section>
-					<p ref={errRef} className={errMsg ? "errMsg" :
+					<p ref={errRef} className={errMsg ? "errmsg" :
 						"offscreen"} aria-live="assertive">{errMsg}</p>
 					<h1>Sign In</h1>
 					<form onSubmit={handleSubmit}>
@@ -107,7 +101,7 @@ const LoginComponent = () => {
 						<span className="line">
 					{/*put router link here*/}
 							<a href="#">Sign Up</a>
-				</span>
+						</span>
 					</p>
 
 				</section>
