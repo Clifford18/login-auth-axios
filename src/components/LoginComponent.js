@@ -2,12 +2,13 @@ import React from 'react';
 import {useRef, useState, useEffect, useContext} from 'react';
 import './LoginStyle.css';
 import AuthContext from "../context/AuthProvider";
+
 import axios from '../api/axios';
 
 const LOGIN_URL = '/auth';
 
 const LoginComponent = () => {
-	const {setAuth} = useContext(AuthContext);
+	const { setAuth } = useContext(AuthContext);
 	const userRef = useRef();
 	const errRef = useRef();
 
@@ -18,11 +19,11 @@ const LoginComponent = () => {
 
 	useEffect(() => {
 		userRef.current.focus();
-	}, []);
+	}, [])
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [user, pwd]);
+	}, [user, pwd])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -30,7 +31,7 @@ const LoginComponent = () => {
 			const response = await axios.post(LOGIN_URL,
 				JSON.stringify({user, pwd}),
 				{
-					headers: {'Content-type': 'application/json'},
+					headers: {'Content-Type': 'application/json'},
 					withCredentials: true
 				}
 			);
@@ -112,7 +113,7 @@ const LoginComponent = () => {
 				</section>
 			)}
 		</>
-	);
-};
+	)
+}
 
 export default LoginComponent;
