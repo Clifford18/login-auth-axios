@@ -45,7 +45,7 @@ const LoginComponent = () => {
 			setSuccess(true);
 
 		} catch (err) {
-			if (!err?.response) {
+			if (!err?.response ) {
 				setErrMsg('No server Response');
 			} else if (err.response?.status === 400) {
 				setErrMsg('Missing Username or Password');
