@@ -2,6 +2,9 @@ import React from 'react';
 import {useRef, useState, useEffect, useContext} from 'react';
 import './LoginStyle.css';
 import AuthContext from "../context/AuthProvider";
+import axios from '../api/axios';
+
+const LOGIN_URL = '/auth';
 
 const LoginComponent = () => {
 	const {setAuth} = useContext(AuthContext);
@@ -23,6 +26,36 @@ const LoginComponent = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		try {
+			const response = await axios.post(LOGIN_URL,
+				JSON.stringify({user, pwd}),
+				{
+					headers: {'Content-type': 'application/json'},
+					withCredentials: true
+				}
+			);
+			console.log(JSON.stringify(response?.data));
+			// console.log(JSON.stringify(response));
+			const accessToken =response?.data?.accessToken;
+			const roles =response?.data?.roles;
+			setAuth(user,pwd,roles,accessToken)
+			setUser('');
+			setPwd('');
+			setSuccess(true);
+
+		} catch (err) {
+			if(!err?.response){
+				setErrMsg('No server Response');
+			}else if (err.response?.status ===400){
+				setErrMsg('Missing Username or Password');
+			}else if (err.response?.status ===401){
+				setErrMsg('Unauthorized');
+			}else {
+				setErrMsg('Login Failed');
+			}
+			errRef.current.focus();
+
+		}
 		console.log(user, pwd);
 		setUser('');
 		setPwd('');
@@ -36,7 +69,7 @@ const LoginComponent = () => {
 					<h1>You are Logged in!</h1>
 					<br/>
 					<p>
-						<a href="#">GO to Home</a>
+						<a href="#">GO to the Dashboard</a>
 					</p>
 
 				</section>
