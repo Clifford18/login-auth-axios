@@ -1,6 +1,6 @@
 import React from 'react';
 import {useRef, useState, useEffect, useContext} from 'react';
-import './LoginStyle.css';
+import './LoginRegisterStyle.css';
 import AuthContext from "../context/AuthProvider";
 
 import axios from '../api/axios';
