@@ -1,4 +1,5 @@
 import {useRef, useState, useEffect} from "react";
+import './LoginRegisterStyle.css';
 
 import React from 'react';
 
@@ -9,7 +10,7 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 const RegisterComponent = () => {
 
 	const userRef = useRef();
-	const userRef = useRef();
+	const errRef = useRef();
 
 	const [user, setUser] = useState('');
 	const [validName, setValidName] = useState(false);
@@ -44,11 +45,11 @@ const RegisterComponent = () => {
 			<p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}
 			   aria-live="assertive">{errMsg}</p>
 			<h1>Register</h1>
-			<form onSubmit={handleSubmit}>
+			<form >
 				<label htmlFor="username">
 					Username:
-					<FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-					<FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+					{/*<FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />*/}
+					{/*<FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />*/}
 				</label>
 				<input
 					type="text"
@@ -64,7 +65,7 @@ const RegisterComponent = () => {
 					onBlur={() => setUserFocus(false)}
 				/>
 				<p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-					<FontAwesomeIcon icon={faInfoCircle} />
+					{/*<FontAwesomeIcon icon={faInfoCircle} />*/}
 					4 to 24 characters.<br />
 					Must begin with a letter.<br />
 					Letters, numbers, underscores, hyphens allowed.
